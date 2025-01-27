@@ -25,9 +25,25 @@ This lex-tool (lexer) is designed to break down C source code into tokens, makin
   - Maintains accurate line counting
   
 ### Usage
-        
+
+To build the lexer:
+```bash
+make
+```
+
+To run the lexer on an input file:
 ```bash
 ./lexer input.c
+```
+
+To run the test suite:
+```bash
+make test
+```
+
+To clean build files:
+```bash
+make clean
 ```
 
 ### Example Output
