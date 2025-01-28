@@ -1,29 +1,23 @@
-# Compiler settings
-CC = gcc                            # Specifies the C compiler to use
-CFLAGS = -Wall -Wextra -I./include # Compiler flags: warnings and include path
+CC = gcc
+CFLAGS = -Wall -Wextra -I./include
+SRC_DIR = src
+OBJ_DIR = obj
+BIN = lexer
 
-# Directory structure
-SRC_DIR = src                       # Source files directory
-OBJ_DIR = obj                       # Object files directory
-BIN = lexer                         # Output binary name
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# Find source files and generate object file names
-SRCS = $(wildcard $(SRC_DIR)/*.c)  # Gets all .c files in src/
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)  # Converts src/file.c to obj/file.o
-
-# Link object files into final executable
 $(BIN): $(OBJS)
 	$(CC) $(OBJS) -o $@
 
-# Compile source files into object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)           # Create obj directory if it doesn't exist
-	$(CC) $(CFLAGS) -c $< -o $@    # Compile .c to .o
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean test                  # Declare targets that aren't files
+.PHONY: clean test
 
-test: $(BIN)                        # Run the lexer on input.c
+test: $(BIN)
 	./$(BIN) input.c
 
-clean:                              # Remove generated files
+clean:
 	rm -rf $(OBJ_DIR) $(BIN)

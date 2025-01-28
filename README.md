@@ -44,7 +44,7 @@ make test
 To clean build files:
 ```bash
 make clean
-```
+```~
 
 ### Example Output
 Lexeme Category Token
